@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDiscovery : MonoBehaviour 
 {
 	public int count = 3;
+	public float time = 1f;
 
 	private List<Player> players = new List<Player> ();
 
@@ -32,7 +33,7 @@ public class PlayerDiscovery : MonoBehaviour
 	IEnumerator Highlight(Player player)
 	{
 		player.SetColor(Color.red);
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (time);
 		player.SetColor(Color.white);
 		hightLightActivated = false;
 	}
