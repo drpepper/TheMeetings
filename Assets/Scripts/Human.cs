@@ -34,7 +34,7 @@ public class Human : MonoBehaviour
 		int hits = GetComponent<Collider2D>().Raycast(_direction, results, speed * Time.deltaTime);
 		if(hits == 0) 
 		{
-			transform.Translate (upDirection * speed * Time.deltaTime);
+			transform.Translate (_direction * speed * Time.deltaTime);
 			return true;
 		} 
 		else 
@@ -54,32 +54,24 @@ public class Human : MonoBehaviour
 
 		switch (_directionName)
 		{
-			case Direction.Stop:
+		case Direction.Stop:
 				_direction = zeroDirection;
 			break;
 
 		case Direction.Top:
-			//_direction = upDirection;
 			_direction = upDirection;
-			transform.rotation = upAngle;
 			break;
 
 		case Direction.Down:
-			//_direction = upDirection;
 			_direction = downDirection;
-			transform.rotation = downAngle;
 			break;
 
 		case Direction.Left:
-			//_direction = upDirection;
 			_direction = leftDirection;
-			transform.rotation = leftAngle;
 			break;
 
 		case Direction.Right:
-			//_direction = upDirection;
 			_direction = rightDirection;
-			transform.rotation = rightAngle;
 			break;
 		}
 	}
