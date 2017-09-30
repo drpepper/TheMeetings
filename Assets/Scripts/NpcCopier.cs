@@ -9,12 +9,14 @@ public class NpcCopier : Human
 	private Direction _lastRegisterDirection = Direction.Stop;
 
 	public float refreshTime = 0f;
+	public string playerName = "PlayerOne";
+
 	private float _timeToRefresh = 0f;
 
 	// Use this for initialization
 	void Start () 
 	{
-		target = GameObject.Find ("PlayerOne").GetComponent<Player>();	
+		target = GameObject.Find (playerName).GetComponent<Player>();	
 		PickSex();
 	}
 	
