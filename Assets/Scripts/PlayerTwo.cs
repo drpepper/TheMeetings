@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerTwo : Player {
 
-	// Use this for initialization
-	void Start () {
-		
+	void Awake () 
+	{
+		PickSex();
+		firstColor = spriteRenderer.color;
 	}
 	
 	void Update () 
@@ -42,10 +43,10 @@ public class PlayerTwo : Player {
 			lastDirection = Direction.Stop;
 		}
 
-		if (Input.GetKey (KeyCode.A))
-			sprite.color = Color.yellow;
-		else
-			sprite.color = Color.white;
+		if (Input.GetKeyDown (KeyCode.X))
+			spriteRenderer.color = Color.yellow;
+		else if(Input.GetKeyUp(KeyCode.X))
+			spriteRenderer.color = firstColor;
 
 		base.HumanUpdate ();
 	}

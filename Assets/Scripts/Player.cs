@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : Human 
 {
-	public SpriteRenderer sprite;
 	public Direction lastDirection = Direction.Stop;
 
 	private int		_inputCount = 0;
@@ -13,11 +12,7 @@ public class Player : Human
 
 	public float average = 0f;
 
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
+	protected Color firstColor;
 
 	public void RegisterInput ()
 	{

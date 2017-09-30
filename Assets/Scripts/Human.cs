@@ -15,15 +15,17 @@ public class Human : MonoBehaviour
 	private static readonly Quaternion	leftAngle	= Quaternion.Euler(new Vector3(0f,0f,90f));
 	private static readonly Quaternion	rightAngle	= Quaternion.Euler(new Vector3(0f,0f,270f));
 
+	public Sprite[] images;
+	public SpriteRenderer spriteRenderer;
+
 	private Direction	_directionName	=	Direction.Top;
 	private Vector3 	_direction		=	zeroDirection;
 
 	public float		speed			= 	0f;
 
-	// Use this for initialization
-	void Start () 
+	protected void PickSex() 
 	{
-		transform.rotation = upAngle;
+		spriteRenderer.sprite = images[Random.Range(0, images.Length)];
 	}
 
 	protected bool HumanUpdate () 
