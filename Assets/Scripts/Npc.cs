@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Npc : Human {
 
-	public List<Direction> moves = new List<Direction> {Direction.Left, Direction.Top, Direction.Right, Direction.Down};
-
 	private float startTime = 0f;
 	private int index = 0;
-	public float durationMax;
-	public float durationMin;
+	private NpcConfiguration config;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+		config = NpcConfiguration.RAND();
 	}
 	
 	// Update is called once per frame
@@ -24,9 +21,9 @@ public class Npc : Human {
 		if (Time.time > startTime)
 		{
 			NextIndex ();
-			MoveTo(moves[index]);
+			MoveTo(config.list[index]);
 
-			startTime = Time.time + Random.Range (durationMin, durationMax);
+			startTime = Time.time + Random.Range (config.minTime, config.maxTime);
 		}
 
 		if(!HumanUpdate()) 
@@ -38,7 +35,7 @@ public class Npc : Human {
 	void NextIndex ()
 	{
 		index++;
-		if (index >= moves.Count)
+		if (index >= config.list.Count)
 		{
 			index = 0;		
 		}

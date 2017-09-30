@@ -31,7 +31,8 @@ public class Human : MonoBehaviour
 		if(_direction == zeroDirection) return true;
 
 		RaycastHit2D[] results = new RaycastHit2D[1];
-		int hits = GetComponent<Collider2D>().Raycast(_direction, results, speed * Time.deltaTime);
+		int layerMask = 1;
+		int hits = GetComponent<Collider2D>().Raycast(_direction, results, speed * Time.deltaTime, layerMask);
 		if(hits == 0) 
 		{
 			transform.Translate (_direction * speed * Time.deltaTime);
