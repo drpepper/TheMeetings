@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Npc : Human {
 
-	private List<Direction> moves = new List<Direction> {Direction.Left, Direction.Top, Direction.Right, Direction.Down};
+	public List<Direction> moves = new List<Direction> {Direction.Left, Direction.Top, Direction.Right, Direction.Down};
 
 	private float startTime = 0f;
 	private int index = 0;
@@ -29,7 +29,10 @@ public class Npc : Human {
 			startTime = Time.time + Random.Range (durationMin, durationMax);
 		}
 
-		HumanUpdate ();
+		if(!HumanUpdate()) 
+		{ 
+			NextIndex();
+		};
 	}
 
 	void NextIndex ()

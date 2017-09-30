@@ -4,5 +4,7 @@
 	Left,
 	Right,
 	Top,
-	Down
+	Down,
+
+	count = 5 
 }

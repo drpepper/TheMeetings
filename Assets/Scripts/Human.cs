@@ -26,24 +26,27 @@ public class Human : MonoBehaviour
 		transform.rotation = upAngle;
 	}
 
-	protected void HumanUpdate () 
+	protected bool HumanUpdate () 
 	{
-		if(_direction == zeroDirection) return;
+		if(_direction == zeroDirection) return true;
 
-		//RaycastHit2D hit = Physics2D.Raycast(transform.position, _direction, speed);
 		RaycastHit2D[] results = new RaycastHit2D[1];
 		int hits = GetComponent<Collider2D>().Raycast(_direction, results, speed * Time.deltaTime);
-		Debug.Log("found " + hits + " hits " + results[0].collider);
 		if(hits == 0) 
 		{
 			transform.Translate (upDirection * speed * Time.deltaTime);
+			return true;
 		} 
+		else 
+		{
+			return false;
+		}
 	}
 
-	void OnCollisionEnter2D(Collision2D coll) 
+	/*void OnCollisionEnter2D(Collision2D coll) 
 	{
 		Debug.Log("collision");    
-    }
+    }*/
 
 	public void MoveTo(Direction direction)
 	{
