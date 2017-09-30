@@ -12,8 +12,7 @@ public class UndercoverCop : MonoBehaviour {
 	public Color undercoverColor = Color.white;
 	public float undercoverTime = 5f;
 
-	public GameObject[] players;
-	public GameObject alertUI;
+	GameObject alertUI;
 
 	SpriteRenderer spriteRenderer;
 
@@ -23,12 +22,20 @@ public class UndercoverCop : MonoBehaviour {
 	enum State { WAITING, ALERTED, TRACKING };
 	State state = State.WAITING;
 
+	GameObject[] players;
+
 	float firstAlertTime = -1;
 
 	void Start() 
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		players = new GameObject[]{ GameObject.Find ("PlayerOne"), GameObject.Find ("PlayerTwo") };
+
+		MC mc = GameObject.Find ("MC").GetComponent<MC>();
+		mc.cops.Add(this);
+		alertUI = mc.alertUI;
 	}
+
 	// Update is called once per frame
 	void Update () 
 	{
