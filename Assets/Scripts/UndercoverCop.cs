@@ -7,6 +7,7 @@ public class UndercoverCop : MonoBehaviour {
 	public float minSpeed = 0.5f;
 	public float maxDistance = 5f;
 	public float alertPause = 0.5f;
+	public float gracePeriod = 5f;
 
 	public Color revealedColor = Color.black;
 	public Color undercoverColor = Color.white;
@@ -19,17 +20,20 @@ public class UndercoverCop : MonoBehaviour {
 	int trackedPlayerIndex = -1;
 	float alertTime = -1;
 
-	enum State { WAITING, ALERTED, TRACKING };
-	State state = State.WAITING;
+	enum State { SLEEPING, WAITING, ALERTED, TRACKING };
+	State state = State.SLEEPING;
 
 	GameObject[] players;
 
+	float startTime = -1f;
 	float firstAlertTime = -1;
 
 	void Start() 
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		players = new GameObject[]{ GameObject.Find ("PlayerOne"), GameObject.Find ("PlayerTwo") };
+
+		startTime = Time.time;
 
 		MC mc = GameObject.Find ("MC").GetComponent<MC>();
 		mc.cops.Add(this);
@@ -39,32 +43,11 @@ public class UndercoverCop : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(state == State.SLEEPING)
 		{
-			int playerIndex = -1;
-			float playerDistance = float.MaxValue;
-			for(var i = 0; i < players.Length; i++) 
-			{
-				float distance = Vector3.Distance(transform.position, players[i].transform.position);
-				if(distance < playerDistance) 
-				{
-					playerIndex = i;
-					playerDistance = distance;
-				}
-			}
-
-			if(playerIndex != -1 && playerDistance < maxDistance && trackedPlayerIndex != playerIndex)
-			{
-				trackedPlayerIndex = playerIndex;
-
-				state = State.ALERTED;
-				alertTime = Time.time;
-				alertUI.SetActive(true);
-
-				if(firstAlertTime == -1) firstAlertTime = Time.time;
-			}
+			if(Time.time - startTime > gracePeriod) state = State.WAITING;
 		}
-		
-		if(state == State.ALERTED)
+		else if(state == State.ALERTED)
 		{
 			if(Time.time - alertTime > alertPause) 
 			{
@@ -89,6 +72,32 @@ public class UndercoverCop : MonoBehaviour {
 			}
 
 			transform.position += distanceVector.normalized * speed * Time.deltaTime;
+		}
+
+		if(state == State.WAITING || state == State.TRACKING)
+		{
+			int playerIndex = -1;
+			float playerDistance = float.MaxValue;
+			for(var i = 0; i < players.Length; i++) 
+			{
+				float distance = Vector3.Distance(transform.position, players[i].transform.position);
+				if(distance < playerDistance) 
+				{
+					playerIndex = i;
+					playerDistance = distance;
+				}
+			}
+
+			if(playerIndex != -1 && playerDistance < maxDistance && trackedPlayerIndex != playerIndex)
+			{
+				trackedPlayerIndex = playerIndex;
+
+				state = State.ALERTED;
+				alertTime = Time.time;
+				alertUI.SetActive(true);
+
+				if(firstAlertTime == -1) firstAlertTime = Time.time;
+			}
 		}
 
 		if(firstAlertTime != -1) 
