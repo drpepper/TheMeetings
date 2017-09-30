@@ -27,6 +27,9 @@ public class Player : Human
 		_inputDate = Time.time;
 	}
 
-	// Update is called once per frame
+	public void SetColor(Color color) 
+	{
+		spriteRenderer.color = color;
+	}
 
 }
