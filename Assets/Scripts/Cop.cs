@@ -21,6 +21,8 @@ public class Cop : MonoBehaviour {
 	{
 		MC mc = GameObject.Find ("MC").GetComponent<MC>();
 		mc.cops.Add(this.gameObject);
+
+		alertUI = transform.Find("Alert").gameObject;
 	}
 
 	void Update () 

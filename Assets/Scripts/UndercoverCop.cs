@@ -40,7 +40,8 @@ public class UndercoverCop : MonoBehaviour {
 
 		MC mc = GameObject.Find ("MC").GetComponent<MC>();
 		mc.cops.Add(this.gameObject);
-		alertUI = mc.alertUI;
+		
+		alertUI = transform.Find("Alert").gameObject;
 	}
 
 	// Update is called once per frame
