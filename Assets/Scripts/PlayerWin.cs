@@ -81,17 +81,19 @@ public class PlayerWin : MonoBehaviour
 				Music.instance.PlayOnce(Music.instance.win);
 				Music.instance.PlayFirstClip();
 
-				endingTime = Time.time;
+				playingOverTime = Time.time;
 				state = State.Found;
 			}
 			else 
 			{
-				//loseScreen.SetActive(true);
+				player1.transform.Find("Caught").gameObject.SetActive(true);
+				player2.transform.Find("Caught").gameObject.SetActive(true);
+
 				FreezeAll();
 				Music.instance.PlayOnce(Music.instance.lose);
 				Music.instance.PlayFirstClip();
 
-				endingTime = Time.time;
+				playingOverTime = Time.time;
 				state = State.Missed;
 			}
 		}
@@ -106,7 +108,7 @@ public class PlayerWin : MonoBehaviour
 					Music.instance.PlayOnce(Music.instance.lose);
 					Music.instance.PlayFirstClip();
 
-					endingTime = Time.time;
+					playingOverTime = Time.time;
 					state = State.Arrested;
 
 					break;
@@ -118,7 +120,7 @@ public class PlayerWin : MonoBehaviour
 					Music.instance.PlayOnce(Music.instance.lose);
 					Music.instance.PlayFirstClip();
 
-					endingTime = Time.time;
+					playingOverTime = Time.time;
 					state = State.Arrested;
 
 					break;
