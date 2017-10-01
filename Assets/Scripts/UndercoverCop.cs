@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UndercoverCop : MonoBehaviour {
+public class UndercoverCop : MonoBehaviour 
+{
 	public float maxSpeed = 3f;
 	public float minSpeed = 0.5f;
 	public float maxDistance = 5f;
@@ -40,7 +41,7 @@ public class UndercoverCop : MonoBehaviour {
 
 		MC mc = GameObject.Find ("MC").GetComponent<MC>();
 		mc.cops.Add(this.gameObject);
-		
+
 		alertUI = transform.Find("Alert").gameObject;
 	}
 
