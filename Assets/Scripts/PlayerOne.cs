@@ -12,6 +12,8 @@ public class PlayerOne : Player {
 
 	void Update () 
 	{
+		if(freeze) return;
+
 		if (Input.GetKeyDown (KeyCode.DownArrow) == true)
 		{
 			MoveTo (Direction.Down);

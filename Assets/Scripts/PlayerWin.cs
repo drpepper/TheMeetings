@@ -83,12 +83,14 @@ public class PlayerWin : MonoBehaviour
 		{
 			if(Vector3.Distance(player1.transform.position, player2.transform.position) < distance) 
 			{
-				// put the players at the same position
-				player1.transform.position = new Vector3(player1.transform.position.x, player2.transform.position.y, player1.transform.position.z); 
-				
+				// Position the players next to each other
+				Vector3 centerPos = Vector3.Lerp(player1.transform.position, player2.transform.position, 0.5f);
+				player1.transform.position = centerPos + new Vector3(-0.25f, 0, 0);
+				player2.transform.position = centerPos + new Vector3(0.25f, 0, 0);
+
 				// Show the found icon
 				foundIcon.SetActive(true);
-				foundIcon.transform.position = Vector3.Lerp(player1.transform.position, player2.transform.position, 0.5f);
+				foundIcon.transform.position = centerPos;
 
 				FreezeAll();
 				Music.instance.PlayOnce(Music.instance.win);
