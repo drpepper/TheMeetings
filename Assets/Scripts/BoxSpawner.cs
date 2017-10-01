@@ -12,27 +12,27 @@ public class BoxSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		const float sampleScale = 10f;
+		// Using Time.time as a seed
+		float seed = Mathf.Repeat(Time.time, 100f);
 		for (int i = 0; i < number; i++)
 		{
-			// Sample Perlin Noise at random points and take those > 0.25
+			// Sample Perlin Noise at random points and take those over a certain value
 			while(true)
 			{
-				Vector2 position = new Vector2(Random.Range(-width/2, width/2), Random.Range(-height/2, height/2));
-				// Using Time.time as a seed
-				if(Mathf.PerlinNoise(Time.time + position.x, Time.time + position.y) > 0.25)
+				float x = Random.value;
+				float y = Random.value;
+
+				if(Mathf.PerlinNoise(seed + x * sampleScale, seed + y * sampleScale) > 0.5)
 				{
-					GameObject.Instantiate (pawn, transform.position + new Vector3 (position.x, position.y, 0f), Quaternion.identity);
+					var localPos = new Vector3 (-width/2 + x * width, -height/2 + y * height, 0f);
+					GameObject.Instantiate (pawn, transform.position + localPos, Quaternion.identity);
 					break;
 				}
 			}
 		}	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-		
+			
 	void OnDrawGizmosSelected ()
 	{
 		Gizmos.color = new Color(1f, 0, 1f, 0.5f);
