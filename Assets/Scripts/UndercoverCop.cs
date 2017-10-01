@@ -13,6 +13,9 @@ public class UndercoverCop : MonoBehaviour {
 	public Color undercoverColor = Color.white;
 	public float undercoverTime = 5f;
 
+	public Sprite undercoverImage;
+	public Sprite revealedImage;
+
 	GameObject alertUI;
 
 	SpriteRenderer spriteRenderer;
@@ -36,7 +39,7 @@ public class UndercoverCop : MonoBehaviour {
 		startTime = Time.time;
 
 		MC mc = GameObject.Find ("MC").GetComponent<MC>();
-		mc.cops.Add(this);
+		mc.cops.Add(this.gameObject);
 		alertUI = mc.alertUI;
 	}
 
@@ -103,7 +106,7 @@ public class UndercoverCop : MonoBehaviour {
 		if(firstAlertTime != -1) 
 		{
 			bool isUndercover = Mathf.Repeat(Time.time - firstAlertTime, undercoverTime * 2) >= undercoverTime;
-			spriteRenderer.color = isUndercover ? undercoverColor : revealedColor;
+			spriteRenderer.sprite = isUndercover ? undercoverImage : revealedImage;
 		}
 	}
 }

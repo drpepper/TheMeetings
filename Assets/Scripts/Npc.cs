@@ -11,7 +11,6 @@ public class Npc : Human {
 	// Use this for initialization
 	void Awake () {
 		config = NpcConfiguration.RAND();
-		PickSex();
 	}
 	
 	// Update is called once per frame

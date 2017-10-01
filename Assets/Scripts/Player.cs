@@ -12,8 +12,6 @@ public class Player : Human
 
 	public float average = 0f;
 
-	protected Color firstColor;
-
 	public void RegisterInput ()
 	{
 		_inputCount++;
@@ -26,10 +24,4 @@ public class Player : Human
 
 		_inputDate = Time.time;
 	}
-
-	public void SetColor(Color color) 
-	{
-		spriteRenderer.color = color;
-	}
-
 }

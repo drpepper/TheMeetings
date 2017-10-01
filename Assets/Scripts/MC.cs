@@ -8,5 +8,5 @@ public class MC : MonoBehaviour {
 	public GameObject playerOne;
 	public GameObject playerTwo;
 	public GameObject playerWin;
-	public List<UndercoverCop> cops;
+	public List<GameObject> cops;
 }

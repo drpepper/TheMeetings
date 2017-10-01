@@ -17,7 +17,6 @@ public class NpcCopier : Human
 	void Start () 
 	{
 		target = GameObject.Find (playerName).GetComponent<Player>();	
-		PickSex();
 	}
 	
 	// Update is called once per frame

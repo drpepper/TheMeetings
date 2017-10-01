@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTwo : Player {
+public class PlayerTwo : Player 
+{
+	SpriteRenderer spriteRenderer;
 
-	void Awake () 
+	void Start() 
 	{
-		PickSex();
-		firstColor = spriteRenderer.color;
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 	}
-	
+
 	void Update () 
 	{
 		if (Input.GetKeyDown (KeyCode.S) == true)
@@ -44,9 +45,9 @@ public class PlayerTwo : Player {
 		}
 
 		if (Input.GetKeyDown (KeyCode.X))
-			spriteRenderer.color = Color.yellow;
+			spriteRenderer.color = Color.black;
 		else if(Input.GetKeyUp(KeyCode.X))
-			spriteRenderer.color = firstColor;
+			spriteRenderer.color = Color.white;
 
 		base.HumanUpdate ();
 	}

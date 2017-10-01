@@ -17,7 +17,12 @@ public class Cop : MonoBehaviour {
 	enum State { WAITING, ALERTED, TRACKING };
 	State state = State.WAITING;
 	
-	// Update is called once per frame
+	void Start() 
+	{
+		MC mc = GameObject.Find ("MC").GetComponent<MC>();
+		mc.cops.Add(this.gameObject);
+	}
+
 	void Update () 
 	{
 		{
