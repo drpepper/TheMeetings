@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerWin : MonoBehaviour 
 {
@@ -15,6 +17,8 @@ public class PlayerWin : MonoBehaviour
 	public GameObject foundScreen;
 
 	public float endingTime = 3f;
+	public string currentSceneName = "";
+	public string nextSceneName = "";
 
 
 	MC mc;
@@ -22,6 +26,7 @@ public class PlayerWin : MonoBehaviour
 	State state = State.Playing;
 
 	float playingOverTime;
+	bool didWin = false;
 
 	void Start() 
 	{
@@ -58,7 +63,15 @@ public class PlayerWin : MonoBehaviour
 			{
 				foundScreen.SetActive(true);
 
+				didWin = true;
 				state = State.Over;
+			}
+		}
+		else if(state == State.Over)
+		{
+			if(Input.anyKeyDown)
+			{
+				SceneManager.LoadScene(didWin ? nextSceneName : currentSceneName);
 			}
 		}
 	}		
