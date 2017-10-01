@@ -11,11 +11,16 @@ public class Npc : Human {
 	// Use this for initialization
 	void Awake () {
 		config = NpcConfiguration.RAND();
+
+		MC mc = GameObject.Find ("MC").GetComponent<MC>();
+		mc.npcs.Add(this.gameObject);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		if(freeze) return;
+
 		//float t = (Time.time - startTime) / durationMax;
 
 		if (Time.time > startTime)

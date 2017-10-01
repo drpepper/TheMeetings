@@ -13,6 +13,9 @@ public class PlayerTwo : Player
 
 	void Update () 
 	{
+		if(freeze) return;
+
+
 		if (Input.GetKeyDown (KeyCode.S) == true)
 		{
 			MoveTo (Direction.Down);

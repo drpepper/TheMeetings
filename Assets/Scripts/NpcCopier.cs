@@ -17,11 +17,16 @@ public class NpcCopier : Human
 	void Start () 
 	{
 		target = GameObject.Find (playerName).GetComponent<Player>();	
+
+		MC mc = GameObject.Find ("MC").GetComponent<MC>();
+		mc.npcs.Add(this.gameObject);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		if(freeze) return;
+
 		if (Time.time > _timeToRefresh)
 		{
 			float random = Random.Range (0f, 1f);

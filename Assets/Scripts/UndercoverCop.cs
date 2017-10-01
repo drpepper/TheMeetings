@@ -27,6 +27,8 @@ public class UndercoverCop : MonoBehaviour
 	enum State { SLEEPING, WAITING, ALERTED, TRACKING };
 	State state = State.SLEEPING;
 
+	public bool freeze = false;
+
 	GameObject[] players;
 
 	float startTime = -1f;
@@ -48,6 +50,9 @@ public class UndercoverCop : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if(freeze) return;
+
+
 		if(state == State.SLEEPING)
 		{
 			if(Time.time - startTime > gracePeriod) state = State.WAITING;
@@ -58,6 +63,9 @@ public class UndercoverCop : MonoBehaviour
 			{
 				state = State.TRACKING;
 				alertUI.SetActive(false);
+
+				Music.instance.PlayClip(3);
+				Music.instance.PlayOnce(Music.instance.alert);
 			}
 
 		}
@@ -100,6 +108,8 @@ public class UndercoverCop : MonoBehaviour
 				state = State.ALERTED;
 				alertTime = Time.time;
 				alertUI.SetActive(true);
+
+				Music.instance.PlayClip(2);
 
 				if(firstAlertTime == -1) firstAlertTime = Time.time;
 			}

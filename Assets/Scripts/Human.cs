@@ -20,6 +20,9 @@ public class Human : MonoBehaviour
 
 	public float		speed			= 	0f;
 
+	public bool freeze = false;
+
+
 	protected bool HumanUpdate () 
 	{
 		if(_direction == zeroDirection) return true;

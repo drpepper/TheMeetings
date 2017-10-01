@@ -16,6 +16,9 @@ public class Cop : MonoBehaviour {
 
 	enum State { WAITING, ALERTED, TRACKING };
 	State state = State.WAITING;
+
+	public bool freeze = false;
+
 	
 	void Start() 
 	{
@@ -27,6 +30,9 @@ public class Cop : MonoBehaviour {
 
 	void Update () 
 	{
+		if(freeze) return;
+
+
 		{
 			int playerIndex = -1;
 			float playerDistance = float.MaxValue;
@@ -47,6 +53,8 @@ public class Cop : MonoBehaviour {
 				state = State.ALERTED;
 				alertTime = Time.time;
 				alertUI.SetActive(true);
+
+				Music.instance.PlayClip(2);
 			}
 		}
 		
@@ -56,6 +64,9 @@ public class Cop : MonoBehaviour {
 			{
 				state = State.TRACKING;
 				alertUI.SetActive(false);
+
+				Music.instance.PlayClip(3);
+				Music.instance.PlayOnce(Music.instance.alert);
 			}
 
 		}
