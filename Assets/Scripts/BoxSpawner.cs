@@ -14,9 +14,17 @@ public class BoxSpawner : MonoBehaviour {
 	{
 		for (int i = 0; i < number; i++)
 		{
-			Vector2 position = new Vector2(Random.Range(-width/2, width/2), Random.Range(-height/2, height/2));
-
-			GameObject.Instantiate (pawn, transform.position + new Vector3 (position.x, position.y, 0f), Quaternion.identity);
+			// Sample Perlin Noise at random points and take those > 0.25
+			while(true)
+			{
+				Vector2 position = new Vector2(Random.Range(-width/2, width/2), Random.Range(-height/2, height/2));
+				// Using Time.time as a seed
+				if(Mathf.PerlinNoise(Time.time + position.x, Time.time + position.y) > 0.25)
+				{
+					GameObject.Instantiate (pawn, transform.position + new Vector3 (position.x, position.y, 0f), Quaternion.identity);
+					break;
+				}
+			}
 		}	
 	}
 	
